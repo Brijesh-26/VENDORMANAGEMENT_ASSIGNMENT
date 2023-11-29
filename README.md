@@ -61,6 +61,18 @@ Welcome to the quick-start guide for your Django project! Get up and running in 
 
 Welcome to the documentation of our vibrant Django API! Below, you'll find details about the available endpoints and their functionalities.
 
+## 🚀 Authentication
+
+### Get Tokens
+- **Endpoint:** `/api/token/`
+- **Method:** `POST`
+- **Description:** Get a authorization token.
+
+### Refresh Tokens
+- **Endpoint:** `api/token/refresh/`
+- **Method:** `POST`
+- **Description:** Refresh The Token In case the access token has been expired.
+
 ## 🚀 Vendors
 
 ### Create Vendor
