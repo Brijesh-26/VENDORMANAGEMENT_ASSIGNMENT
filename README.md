@@ -14,7 +14,7 @@ Welcome to the quick-start guide for your Django project! Get up and running in 
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/your-username/your-django-project.git
+   git clone https://github.com/Brijesh-26/VENDORMANAGEMENT_ASSIGNMENT.git
    cd your-django-project
 
 1. **Create a Virtual Environment:**
