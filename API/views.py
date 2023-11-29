@@ -7,9 +7,12 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.db.models import Avg, Count
 from django.views.decorators.http import require_http_methods
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def create_vendor(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
@@ -27,6 +30,7 @@ def create_vendor(request):
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def get_all_vendors(request):
     if request.method == 'GET':
         vendors = Vendor.objects.all()
@@ -38,6 +42,7 @@ def get_all_vendors(request):
 
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def get_vendor_by_id(request, vendor_id):
     if request.method == 'GET':
         vendor = get_object_or_404(Vendor, id=vendor_id)
@@ -59,6 +64,7 @@ def get_vendor_by_id(request, vendor_id):
 
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def update_vendor(request, vendor_id):
     vendor = get_object_or_404(Vendor, id=vendor_id)
 
@@ -79,6 +85,7 @@ def update_vendor(request, vendor_id):
 
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def delete_vendor(request, vendor_id):
     vendor = get_object_or_404(Vendor, id=vendor_id)
 
@@ -94,6 +101,7 @@ def delete_vendor(request, vendor_id):
 # working on purchase stuffs
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def create_purchase_order(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
@@ -110,8 +118,10 @@ def create_purchase_order(request):
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
-@csrf_exempt
+@permission_classes([IsAuthenticated])
 def list_all_purchases(request):
+    print(request.user)
+
     if request.method == 'GET':
         purchases = Purchase.objects.all().values()
 
@@ -122,6 +132,7 @@ def list_all_purchases(request):
 
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def get_purchase_by_id(request, id):
     if request.method == 'GET':
         try:
@@ -154,6 +165,7 @@ def get_purchase_by_id(request, id):
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def update_purchase_order(request, id):
     try:
         purchase = get_object_or_404(Purchase, id=id)
@@ -176,6 +188,7 @@ def update_purchase_order(request, id):
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def delete_purchase_order(request, id):
     purchase = get_object_or_404(Purchase, id=id)
 
@@ -224,6 +237,7 @@ def calculate_fulfilment_rate(vendor_id):
 
 
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def get_vendor_metrics(request, vendor_id):
     if request.method == 'GET':
         on_time_delivery_rate = calculate_on_time_delivery_rate(vendor_id)
